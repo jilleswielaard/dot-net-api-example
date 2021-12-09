@@ -1,17 +1,12 @@
 using MastermindApi.Models;
 using Microsoft.EntityFrameworkCore;
 
-var configuration = new ConfigurationBuilder()
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json")
-    .Build();
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<MastermindContext>(options => options.UseSqlServer(configuration.GetConnectionString("MastermindDB")));
+builder.Services.AddDbContext<MastermindContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MastermindDB")));
 
 var app = builder.Build();
 
